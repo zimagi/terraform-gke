@@ -38,7 +38,7 @@ jobs:
       - run:
           name: terraform init
           command: |
-            terraform fmt -recursive -check "./../.."
+            terraform fmt -recursive -check
             terraform init -input=false
       - save_cache:
           key: terraform-init-v4-{{ checksum ".terraform.lock.hcl" }}
