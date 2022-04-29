@@ -1,6 +1,4 @@
-version: '2.1'
-orbs:
-  terraform: circleci/terraform@1.0.0
+version: 2
 jobs:
   gate-job:
     docker:
@@ -26,19 +24,35 @@ jobs:
           destination: test_result_file
     working_directory: test
   check-job:
-    executor: terraform/default
+    working_directory: examples/complete
+    docker:
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    environment:
+      TF_CLI_ARGS: -no-color
+      TF_IN_AUTOMATION: true
     steps:
       - checkout
-      - terraform/init:
-          path: examples/complete
-      - terraform/validate:
-          path: examples/complete
-      - terraform/fmt:
-          path: examples/complete
-      - terraform/fmt:
-          path: .
-      - terraform/plan:
-          path: examples/complete
+      - restore_cache:
+          keys:
+            - terraform-init-v4-{{ checksum ".terraform.lock.hcl" }}
+      - run:
+          name: terraform init
+          command: |
+            terraform fmt -recursive -check ./../..
+            terraform init -input=false
+      - save_cache:
+          key: terraform-init-v4-{{ checksum ".terraform.lock.hcl" }}
+          paths:
+            - ".terraform"
+      - run:
+          name: terraform validate
+          command: terraform validate
+       - run:
+          name: terraform plan
+          command: terraform plan -out tfplan -var-file fixtures.tfvars
+      - store_artifacts:
+          path: complete/examples/tfplan
+          destination: tfplan
 workflows:
   terraform-workflow:
     jobs:
