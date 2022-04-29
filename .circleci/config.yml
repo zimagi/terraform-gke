@@ -46,7 +46,7 @@ workflows:
       - check-job
       - gate-job:
           requires:
-            - build
+            - check-job
           filters:
             branches:
               only:
