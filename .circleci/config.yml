@@ -30,16 +30,15 @@ jobs:
     steps:
       - checkout
       - terraform/init:
-          path: .
+          path: examples/complete
       - terraform/validate:
-          path: .
+          path: examples/complete
       - terraform/fmt:
-          path: ./../..
+          path: examples/complete
       - terraform/fmt:
           path: .
       - terraform/plan:
-          path: .
-    working_directory: examples/complete
+          path: examples/complete
 workflows:
   terraform-workflow:
     jobs:
