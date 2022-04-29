@@ -1,38 +1,27 @@
-# Provision an GKE Cluster with Terraform
+# Zimagi Cluster on GKE
 
-## Software requirements
-- [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-- google cloud CLI
+## Introduction
 
-### Configure azcli
-After you've installed the gcloud SDK, initialize it by running the following command.
+Terraform module for deploy a gke cluster for Zimagi cluster. Provisioning contains the following resources:
 
-```shell
-$ gcloud init
-```
-This will authorize the SDK to access GCP using your user account credentials and add the SDK to your PATH. This steps requires you to login and select the project you want to work in. Finally, add your account to the Application Default Credentials (ADC). This will allow Terraform to access these credentials to provision resources on GCloud.
+* VPC
+* Subnet
+* Kubernetes Controle Plane
+* Linux Node Pool
+* IAM Service Acccount
 
-```shell
-$ gcloud auth application-default login
-```
-Then, replace terraform.tfvars values with your project_id.
-```shell
-gcloud config get-value project
-```
+## Folder structure
 
-## Provision AKS cluster
-```shell
-$ terraform init
-$ terraform plan
-$ terraform apply
-```
+The root folder contains the terraform configuration of provisioning, test folder, circleci configuration and examples folder.
 
-## Teardown AKS cluster
-```shell
-terraform destroy
-```
+* Root module files:
+  * main.tf: contains the logic of provisioning
+  * outputs.tf: register attributes of deployed resources
+  * variables.tf: varaiable definition of module
+  * versions.tf: terraform's provider version requirements
+* Circleci: ./.circle folder contains the jobs of the cicd project
+* test: automated tests are found here
+* examples: preconfigured examples
+## Configure cluster
 
-## Configure kubectl
-```shell
-gcloud container clusters get-credentials $(terraform output kubernetes_cluster_name) --region $(terraform output region)
-```
+Module can be configured by .tfvars file.
