@@ -5,7 +5,9 @@ jobs:
       - image: circleci/golang:1.17.0
     steps:
       - checkout
-
+      - restore_cache:
+          keys:
+            - go-mod-v4-{{ checksum "go.sum" }}
       - run:
           name: Install Dependencies
           command: go mod download -x
@@ -30,9 +32,9 @@ jobs:
       TF_IN_AUTOMATION: "true"
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - terraform-init-v4-{{ checksum ".terraform.lock.hcl" }}
+      # - restore_cache:
+      #     keys:
+      #       - terraform-init-v4-{{ checksum ".terraform.lock.hcl" }}
       - run:
           name: terraform init
           command: |
