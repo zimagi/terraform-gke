@@ -35,7 +35,8 @@ jobs:
           path: .
       - terraform/fmt:
           path: ./../..
-          recursive: true
+      - terraform/fmt:
+          path: .
       - terraform/plan:
           path: .
     working_directory: examples/complete
