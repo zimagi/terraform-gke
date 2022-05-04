@@ -22,25 +22,35 @@ jobs:
       - store_artifacts:
           path: /tmp/test_result_file.txt
           destination: test_result_file
-    working_directory: test
-  check-job:
-    working_directory: examples/complete
+  format-root-module:
     docker:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
     environment:
-      TF_CLI_ARGS: -no-color
+      TF_CLI_ARGS: "-no-color"
       TF_IN_AUTOMATION: "true"
     steps:
       - checkout
+    run:
+      name: terraform format
+      command: |
+        terraform fmt -check
+  check-job:
+    docker:
+      - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
+    environment:
+      TF_CLI_ARGS: "-no-color"
+      TF_IN_AUTOMATION: "true"
+    working_directory: ~/kubernetes-gke/examples/complete
+    steps:
+      - checkout
+          path: ~/kubernetes-gke
       # - restore_cache:
       #     keys:
       #       - terraform-init-v4-{{ checksum ".terraform.lock.hcl" }}
       - run:
           name: terraform init
           command: |
-            echo $(pwd)
-            ls -la
-            terraform fmt -recursive -check
+            terraform fmt -check
             terraform init -input=false
       - save_cache:
           key: terraform-init-v4-{{ checksum ".terraform.lock.hcl" }}
@@ -48,17 +58,18 @@ jobs:
             - ".terraform"
       - run:
           name: terraform validate
-          command: terraform validate
+          command: cd examples/completterraform validate
       - run:
           name: terraform plan
           command: terraform plan -out tfplan -var-file fixtures.tfvars
       - store_artifacts:
-          path: complete/examples/tfplan
+          path: tfplan
           destination: tfplan
 workflows:
   terraform-workflow:
     jobs:
       - check-job
+      - format-root-module
       - gate-job:
           requires:
             - check-job
