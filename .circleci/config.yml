@@ -22,7 +22,7 @@ jobs:
       - store_artifacts:
           path: /tmp/test_result_file.txt
           destination: test_result_file
-  format-root-module:
+  root-module-format-check:
     docker:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
     environment:
@@ -30,10 +30,9 @@ jobs:
       TF_IN_AUTOMATION: "true"
     steps:
       - checkout
-    run:
-      name: terraform format
-      command: |
-        terraform fmt -check
+      - run:
+          name: terraform format
+          command: terraform fmt -check
   check-job:
     docker:
       - image: docker.mirror.hashicorp.services/hashicorp/terraform:light
@@ -69,7 +68,7 @@ workflows:
   terraform-workflow:
     jobs:
       - check-job
-      - format-root-module
+      - root-module-format-check
       - gate-job:
           requires:
             - check-job
