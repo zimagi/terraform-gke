@@ -47,6 +47,11 @@ jobs:
       #     keys:
       #       - terraform-init-v4-{{ checksum ".terraform.lock.hcl" }}
       - run:
+          name: debug
+          command: |
+            pwd
+            ls -la
+      - run:
           name: terraform init
           command: |
             terraform fmt -check
