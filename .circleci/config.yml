@@ -57,7 +57,7 @@ jobs:
             - ".terraform"
       - run:
           name: terraform validate
-          command: cd examples/completterraform validate
+          command: terraform validate
       - run:
           name: terraform plan
           command: terraform plan -out tfplan -var-file fixtures.tfvars
