@@ -42,7 +42,7 @@ jobs:
       TF_IN_AUTOMATION: "true"
     working_directory: ~/kubernetes-gke/examples/complete
     steps:
-      - checkout
+      - checkout:
           path: ~/kubernetes-gke
       # - restore_cache:
       #     keys:
