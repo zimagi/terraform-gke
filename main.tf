@@ -46,6 +46,16 @@ resource "google_container_cluster" "this" {
     ]
   }
 
+  addons_config {
+    http_load_balancing {
+      disabled = false
+    }
+
+    gcp_filestore_csi_driver_config {
+      enabled = true
+    }
+  }
+
   lifecycle {
     ignore_changes = [node_config]
   }
