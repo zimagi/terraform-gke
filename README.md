@@ -136,3 +136,15 @@ GKE by default implements SNAT on the nodes to public IP destinations. When usin
 * Pods privately use the 5.0.0.0/16 public IP address range as the subnet's secondary IP address range for Pods.
 * Services privately use the 5.1.0.0/16 public IP address range as the subnet's secondary IP address range for Services.
 * The internal IP address range for the control plane is 172.16.0.16/**28**
+
+
+### Regional Cluster
+
+In regional cluster the cluster's control plane is replicated across multiple zones in a given region. For node pools in a regional cluster, you can manually specify the zone(s) in which to run the node pools or you can use the default configuration, which replicates each node pool across three zones of the control plane's region. All zones must be within the same region as the cluster's control plane.
+
+![GKE Regional Cluster](docs/assets/gke_regional_cluster.png)
+
+By creating a regional cluster, you get:
+
+* Resilience from single zone failure - Because your masters and application nodes are available across a region rather than a single zone, your Kubernetes cluster is still fully functional if an entire zone goes down.
+* No downtime during master upgrades - Kubernetes Engine minimizes downtime during all Kubernetes master upgrades, but with a single master, some downtime is inevitable. By using regional clusters, the control plane remains online and available, even during upgrades.
