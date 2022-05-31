@@ -6,9 +6,7 @@ provider "google" {
 module "gke" {
   source = "./../.."
 
-  region     = var.region
-  location   = var.location
   project_id = var.project_id
 
-  gke_num_nodes = var.gke_num_nodes
+  region = var.region
 }
