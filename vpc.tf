@@ -1,9 +1,24 @@
+locals {
+  secondary_ranges = {
+    "${var.secondary_ranges_name}" = [
+      {
+        range_name    = "pods"
+        ip_cidr_range = var.secondary_ranges_pods_ip_cidr_range
+      },
+      {
+        range_name    = "services"
+        ip_cidr_range = var.secondary_ranges_services_ip_cidr_range
+      },
+    ]
+  }
+}
+
 module "vpc" {
   source  = "terraform-google-modules/network/google"
   version = "5.0.0"
 
   project_id   = var.project_id
-  network_name = "eja-test-zimagi-platform"
+  network_name = local.vpc_name
 
   auto_create_subnetworks = false
   shared_vpc_host         = false
@@ -12,22 +27,11 @@ module "vpc" {
 
   subnets = [
     {
-      subnet_name   = "eja-test-zimagi-platform"
-      subnet_ip     = "10.0.0.0/17"
+      subnet_name   = local.subnet_name
+      subnet_ip     = var.subnet_ip
       subnet_region = var.region
     },
   ]
 
-  secondary_ranges = {
-    "eja-test-zimagi-platform" = [
-      {
-        range_name    = "pods"
-        ip_cidr_range = "192.168.0.0/18"
-      },
-      {
-        range_name    = "services"
-        ip_cidr_range = "192.168.64.0/18"
-      },
-    ]
-  }
+  secondary_ranges = local.secondary_ranges
 }
