@@ -6,9 +6,6 @@ variable "environment" {
   description = "env"
 }
 
-variable "attributes" {
-  description = "attr"
-}
 
 variable "name" {
   description = "name"
