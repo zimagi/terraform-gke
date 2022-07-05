@@ -6,7 +6,7 @@ locals {
       repository = "https://charts.zimagi.com"
       version    = "1.0.42"
       values = [
-        "${file("helm/argocd_values.yaml")}"
+        "${file("${path.module}/helm/argocd_values.yaml")}"
       ]
       create_namespace = true
     }
@@ -16,7 +16,7 @@ locals {
       repository = "https://charts.zimagi.com"
       version    = "1.0.3"
       values = [
-        "${file("helm/argocd_apps_values.yaml")}"
+        "${file("${path.module}/helm/argocd_apps_values.yaml")}"
       ]
       create_namespace = true
     }
