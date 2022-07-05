@@ -3,8 +3,8 @@ resource "random_id" "suffix" {
 }
 
 locals {
-  vpc_name              = "${var.prefix}-${var.environment}-${var.name}-${random_id.suffix.hex}"
-  subnet_name           = "${var.prefix}-${var.environment}-${var.name}-${random_id.suffix.hex}"
-  secondary_ranges_name = "${var.prefix}-${var.environment}-${var.name}-${random_id.suffix.hex}"
-  cluster_name          = "${var.prefix}-${var.environment}-${var.name}-${random_id.suffix.hex}"
+  vpc_name              = "${var.prefix}-${var.environment}-${var.name}"
+  subnet_name           = "${var.prefix}-${var.environment}-${var.name}"
+  secondary_ranges_name = "${var.prefix}-${var.environment}-${var.name}"
+  cluster_name          = "${var.prefix}-${var.environment}-${var.name}"
 }
