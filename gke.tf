@@ -27,7 +27,7 @@ module "gke" {
   version = "21.1.0"
 
   project_id = var.project_id
-  name       = "eja-test-zimagi-platform"
+  name       = local.cluster_name
 
   regional          = true
   region            = var.region

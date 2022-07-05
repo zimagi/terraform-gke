@@ -1,18 +1,3 @@
-locals {
-  secondary_ranges = {
-    "${var.secondary_ranges_name}" = [
-      {
-        range_name    = "pods"
-        ip_cidr_range = var.secondary_ranges_pods_ip_cidr_range
-      },
-      {
-        range_name    = "services"
-        ip_cidr_range = var.secondary_ranges_services_ip_cidr_range
-      },
-    ]
-  }
-}
-
 module "vpc" {
   source  = "terraform-google-modules/network/google"
   version = "5.0.0"
@@ -33,5 +18,16 @@ module "vpc" {
     },
   ]
 
-  secondary_ranges = local.secondary_ranges
+  secondary_ranges = {
+    local.subnet_name = [
+      {
+        range_name    = "pods"
+        ip_cidr_range = "192.168.0.0/18"
+      },
+      {
+        range_name    = "services"
+        ip_cidr_range = "192.168.64.0/18"
+      },
+    ]
+  }
 }
