@@ -7,6 +7,10 @@ variable "environment" {
 }
 
 
+variable "enable_vpc" {
+  default = true
+}
+
 variable "name" {
   description = "name"
 }
