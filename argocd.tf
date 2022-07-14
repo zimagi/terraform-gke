@@ -2,9 +2,9 @@ locals {
   helm_charts = {
     argocd = {
       name       = "argocd"
-      chart      = "argo-cd"
-      repository = "https://argoproj.github.io/argo-helm"
-      version    = "4.9.11"
+      chart      = "zimagi"
+      repository = "https://charts.zimagi.com"
+      version    = "1.0.42"
       values = [
         "${file("${path.module}/helm/argocd_values.yaml")}"
       ]
