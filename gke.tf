@@ -2,7 +2,7 @@ locals {
   platform_nodes = [
     {
       name               = "platform-pool"
-      machine_type       = "n1-standard-1"
+      machine_type       = "n2-standard-2"
       min_count          = 1
       max_count          = 10
       disk_size_gb       = 10
