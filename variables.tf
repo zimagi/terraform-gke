@@ -6,11 +6,6 @@ variable "environment" {
   description = "env"
 }
 
-
-variable "enable_vpc" {
-  default = true
-}
-
 variable "name" {
   description = "name"
 }
