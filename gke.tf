@@ -41,8 +41,8 @@ module "gke" {
 
   regional          = true
   region            = var.region
-  network           = module.vpc.network_name
-  subnetwork        = module.vpc.subnets_names[0]
+  network           = var.vpc_name == "" ? module.vpc[0].network_name : var.vpc_name
+  subnetwork        = var.vpc_name == "" ? module.vpc[0].subnets_names[0] : var.subnetwork
   ip_range_pods     = "pods"
   ip_range_services = "services"
 
@@ -55,12 +55,13 @@ module "gke" {
   enable_private_nodes       = true
   master_ipv4_cidr_block     = "172.16.0.0/28"
 
-  master_authorized_networks = [
+  master_authorized_networks = concat([
     {
-      cidr_block   = module.vpc.subnets_ips[0]
+      cidr_block   = try(module.vpc[0].subnets_ips[0], var.subnet_ip)
       display_name = "VPC"
     },
-  ]
+  ],
+  var.master_authorized_networks)
 
   node_pools = local.node_pools
 }

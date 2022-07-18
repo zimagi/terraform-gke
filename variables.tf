@@ -50,3 +50,20 @@ variable "secondary_ranges_pods_ip_cidr_range" {
 variable "secondary_ranges_services_ip_cidr_range" {
   default = "192.168.64.0/18"
 }
+
+variable "vpc_name" {
+  default = ""
+}
+
+variable "subnetwork" {
+  default = ""
+}
+
+variable "master_authorized_networks" {
+  default = []
+}
+
+variable "subnet_ips" {
+  type = string
+  default = ""
+}

@@ -2,8 +2,10 @@ module "vpc" {
   source  = "terraform-google-modules/network/google"
   version = "5.0.0"
 
+  count = var.vpc_name == "" ? 1 : 0
+
   project_id   = var.project_id
-  network_name = local.vpc_name
+  network_name = var.vpc_name == "" ? local.vpc_name : var.vpc_name
 
   auto_create_subnetworks = false
   shared_vpc_host         = false
