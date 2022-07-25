@@ -34,7 +34,7 @@ data "google_client_config" "default" {}
 
 module "gke" {
   source  = "terraform-google-modules/kubernetes-engine/google//modules/beta-private-cluster"
-  version = "21.1.0"
+  version = "22.0.0"
 
   project_id = var.project_id
   name       = local.cluster_name
