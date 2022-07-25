@@ -67,3 +67,8 @@ variable "subnet_ips" {
   type = string
   default = ""
 }
+
+variable "kubernetes_version" {
+  type = string
+  default = "1.22.8-gke.202"
+}
