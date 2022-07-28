@@ -16,3 +16,8 @@ output "service_account" {
   description = "The default service account used for running nodes."
   value       = module.gke.service_account
 }
+
+output "peering_name" {
+  description = "The name of the peering between this cluster and the Google owned VPC."
+  value = module.gke.peering_name
+}
