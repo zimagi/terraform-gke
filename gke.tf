@@ -54,6 +54,8 @@ module "gke" {
   enable_private_endpoint    = true
   enable_private_nodes       = true
   master_ipv4_cidr_block     = var.master_ipv4_cidr_block
+  ip_range_pods              = var.ip_range_pods
+  ip_range_services          = var.ip_range_services
   enable_binary_authorization = true
   kubernetes_version         = var.kubernetes_version
 
