@@ -76,11 +76,3 @@ variable "kubernetes_version" {
 variable "master_ipv4_cidr_block" {
   default = "172.16.0.32/28"
 }
-
-variable "ip_range_pods" {
-  default = "pods"
-}
-
-variable "ip_range_services" {
-  default = "services"
-}
