@@ -53,7 +53,7 @@ module "gke" {
   filestore_csi_driver       = false
   enable_private_endpoint    = true
   enable_private_nodes       = true
-  master_ipv4_cidr_block     = "172.16.0.0/28"
+  master_ipv4_cidr_block     = var.master_ipv4_cidr_block
   enable_binary_authorization = true
   kubernetes_version         = var.kubernetes_version
 

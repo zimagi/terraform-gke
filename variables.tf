@@ -72,3 +72,7 @@ variable "kubernetes_version" {
   type = string
   default = "1.22.8-gke.202"
 }
+
+variable "master_ipv4_cidr_block" {
+  default = "172.16.0.32/28"
+}
