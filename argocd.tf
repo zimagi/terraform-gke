@@ -8,6 +8,7 @@ locals {
       values = [
         "${file("${path.module}/helm/argocd_values.yaml")}"
       ]
+      namespace = "argo-cd"
       create_namespace = true
     }
     argocd_apps = {
@@ -18,6 +19,7 @@ locals {
       values = [
         "${file("${path.module}/helm/argocd_apps_values.yaml")}"
       ]
+      namespace = "argo-cd"
       create_namespace = true
     }
   }
@@ -30,6 +32,7 @@ resource "helm_release" "this" {
   ]
   name             = each.value.name
   chart            = each.value.chart
+  namespace = each.value.namespace
   repository       = each.value.repository
   values           = each.value.values
   create_namespace = each.value.create_namespace
