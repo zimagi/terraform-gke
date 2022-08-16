@@ -2,7 +2,7 @@ locals {
   helm_charts = {
     argocd = {
       name       = "argo-cd"
-      chart      = "zimagi"
+      chart      = "argo-cd"
       repository = "https://argoproj.github.io/argo-helm"
       version    = "4.10.6"
       values = [
