@@ -1,26 +1,22 @@
 locals {
   helm_charts = {
     argocd = {
-      name       = "argo-cd"
-      chart      = "argo-cd"
-      repository = "https://argoproj.github.io/argo-helm"
-      version    = "4.10.6"
-      values = [
-        "${file("${path.module}/helm/argocd_values.yaml")}"
-      ]
-      namespace = "argo-cd"
-      create_namespace = true
+      name       = lookup(var.argocd_chart, "name", "argo-cd")
+      chart      = lookup(var.argocd_chart, "chart", "argo-cd")
+      repository = lookup(var.argocd_chart, "repository", "https://argoproj.github.io/argo-helm")
+      version    = lookup(var.argocd_chart, "version", "4.10.6")
+      values = lookup(var.argocd_chart, "values", tolist(["${file("${path.module}/helm/argocd_values.yaml")}", "${file("${path.root}/helm/argocd_values.yaml")}"]))
+      namespace = lookup(var.argocd_chart, "namespace", "argo-cd")
+      create_namespace = lookup(var.argocd_chart, "create_namespace", true)
     }
     argocd_apps = {
-      name       = "argocd-apps"
-      chart      = "argocd-apps"
-      repository = "https://charts.zimagi.com"
-      version    = "1.0.3"
-      values = [
-        "${file("${path.module}/helm/argocd_apps_values.yaml")}"
-      ]
-      namespace = "argo-cd"
-      create_namespace = true
+      name       = lookup(var.argocd_apps_chart, "name", "argocd-apps")
+      chart      = lookup(var.argocd_apps_chart, "chart", "argocd-apps")
+      repository = lookup(var.argocd_apps_chart, "repository", "https://charts.zimagi.com")
+      version    = lookup(var.argocd_apps_chart, "version", "1.0.3")
+      values = lookup(var.argocd_apps_chart, "values", tolist(["${file("${path.module}/helm/argocd_apps_values.yaml")}"]))
+      namespace = lookup(var.argocd_apps_chart, "namespace", "argo-cd")
+      create_namespace = lookup(var.argocd_apps_chart, "create_namespace", true)
     }
   }
 }

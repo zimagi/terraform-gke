@@ -1,3 +1,7 @@
+output "cluster_name" {
+  value = module.gke.name
+}
+
 output "kubernetes_endpoint" {
   sensitive = true
   value     = module.gke.endpoint
