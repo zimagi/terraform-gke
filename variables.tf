@@ -76,11 +76,3 @@ variable "kubernetes_version" {
 variable "master_ipv4_cidr_block" {
   default = "172.16.0.32/28"
 }
-
-variable "argocd_chart" {
-  type = any
-}
-
-variable "argocd_apps_chart" {
-  type = any
-}
