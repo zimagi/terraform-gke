@@ -8,7 +8,7 @@ locals {
       disk_size_gb       = 10
       disk_type          = "pd-ssd"
       auto_repair        = true
-      auto_upgrade       = false
+      auto_upgrade       = true
       preemptible        = false
       initial_node_count = 1
     },
