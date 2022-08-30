@@ -70,7 +70,7 @@ variable "subnet_ips" {
 
 variable "kubernetes_version" {
   type = string
-  default = "1.22.8-gke.202"
+  default = ""
 }
 
 variable "master_ipv4_cidr_block" {
