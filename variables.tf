@@ -64,15 +64,17 @@ variable "master_authorized_networks" {
 }
 
 variable "subnet_ips" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "kubernetes_version" {
-  type = string
+  type    = string
   default = ""
 }
 
 variable "master_ipv4_cidr_block" {
   default = "172.16.0.32/28"
 }
+
+variable "release_channel" {}

@@ -46,23 +46,24 @@ module "gke" {
   ip_range_pods     = "pods"
   ip_range_services = "services"
 
-  create_service_account     = true
-  http_load_balancing        = false
-  network_policy             = false
-  horizontal_pod_autoscaling = true
-  filestore_csi_driver       = false
-  enable_private_endpoint    = true
-  enable_private_nodes       = true
-  master_ipv4_cidr_block     = var.master_ipv4_cidr_block
+  create_service_account      = true
+  http_load_balancing         = false
+  network_policy              = false
+  horizontal_pod_autoscaling  = true
+  filestore_csi_driver        = false
+  enable_private_endpoint     = true
+  enable_private_nodes        = true
+  master_ipv4_cidr_block      = var.master_ipv4_cidr_block
   enable_binary_authorization = true
-  kubernetes_version         = var.kubernetes_version
+  kubernetes_version          = var.kubernetes_version
+  release_channel             = var.release_channel
 
   master_authorized_networks = concat([
     {
       cidr_block   = try(module.vpc[0].subnets_ips[0], var.subnet_ip)
       display_name = "VPC"
     },
-  ],
+    ],
   var.master_authorized_networks)
 
   node_pools = local.node_pools
