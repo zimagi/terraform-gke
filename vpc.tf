@@ -41,6 +41,6 @@ resource "google_compute_network_peering_routes_config" "peering_gke_routes" {
   peering = module.gke.peering_name
   network = var.vpc_name == "" ? local.vpc_name : var.vpc_name
 
-  import_custom_routes = true
+  import_custom_routes = false
   export_custom_routes = true
 }
