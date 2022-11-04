@@ -51,8 +51,8 @@ module "gke" {
   network_policy              = false
   horizontal_pod_autoscaling  = true
   filestore_csi_driver        = false
-  enable_private_endpoint     = true
-  enable_private_nodes        = true
+  enable_private_endpoint     = var.enable_private_endpoint
+  enable_private_nodes        = var.enable_private_nodes
   master_ipv4_cidr_block      = var.master_ipv4_cidr_block
   enable_binary_authorization = true
   kubernetes_version          = var.kubernetes_version

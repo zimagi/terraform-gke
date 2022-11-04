@@ -78,3 +78,7 @@ variable "master_ipv4_cidr_block" {
 }
 
 variable "release_channel" {}
+
+variable "enable_private_endpoint" {}
+
+variable "enable_private_nodes" {}

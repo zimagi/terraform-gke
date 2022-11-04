@@ -7,15 +7,15 @@ variable "region" {
 }
 
 variable "prefix" {
-  
+
 }
 
 variable "environment" {
-  
+
 }
 
 variable "name" {
-  
+
 }
 
 variable "vpc_name" {
