@@ -77,8 +77,14 @@ variable "master_ipv4_cidr_block" {
   default = "172.16.0.32/28"
 }
 
-variable "release_channel" {}
+variable "release_channel" {
+  default = "UNSPECIFIED"
+}
 
-variable "enable_private_endpoint" {}
+variable "enable_private_endpoint" {
+  default = true
+}
 
-variable "enable_private_nodes" {}
+variable "enable_private_nodes" {
+  default = true
+}
