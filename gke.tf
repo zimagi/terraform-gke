@@ -22,16 +22,6 @@ locals {
 
 data "google_client_config" "default" {}
 
-
-resource "google_compute_network_peering_routes_config" "peering_gke_routes" {
-  project_id = var.project_id
-  peering    = module.gke.peering_name
-  network    = module.vpc.network_name
-
-  import_custom_routes = true
-  export_custom_routes = true
-}
-
 module "gke" {
   source  = "terraform-google-modules/kubernetes-engine/google//modules/beta-private-cluster"
   version = "22.1.0"
