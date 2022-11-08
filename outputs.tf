@@ -23,5 +23,5 @@ output "service_account" {
 
 output "peering_name" {
   description = "The name of the peering between this cluster and the Google owned VPC."
-  value       = module.gke.peering_name
+  value       = var.enable_private_endpoint ? module.gke.peering_name : null
 }
