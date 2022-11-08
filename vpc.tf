@@ -38,7 +38,7 @@ resource "google_compute_network_peering_routes_config" "peering_gke_routes" {
   depends_on = [
     module.gke
   ]
-  count = var.var.enable_private_endpoint ? 1 : 0
+  count = var.enable_private_endpoint ? 1 : 0
 
   peering = module.gke.peering_name
   network = var.vpc_name == "" ? local.vpc_name : var.vpc_name
