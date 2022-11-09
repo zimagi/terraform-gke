@@ -47,10 +47,8 @@ jobs:
       #     keys:
       #       - terraform-init-v4-{{ checksum ".terraform.lock.hcl" }}
       - run:
-          name: debug
-          command: |
-            pwd
-            ls -la
+          name: terraform format
+          command: terraform fmt -check
       - run:
           name: terraform init
           command: |
@@ -63,12 +61,6 @@ jobs:
       - run:
           name: terraform validate
           command: terraform validate
-      - run:
-          name: terraform plan
-          command: terraform plan -out tfplan -var-file fixtures.tfvars
-      - store_artifacts:
-          path: tfplan
-          destination: tfplan
 workflows:
   terraform-workflow:
     jobs:
