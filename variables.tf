@@ -88,3 +88,7 @@ variable "enable_private_endpoint" {
 variable "enable_private_nodes" {
   default = true
 }
+
+variable "remove_default_node_pool" {
+  default = true
+}

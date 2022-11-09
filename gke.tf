@@ -48,6 +48,8 @@ module "gke" {
   kubernetes_version          = var.kubernetes_version
   release_channel             = var.release_channel
 
+  remove_default_node_pool = var.remove_default_node_pool
+
   master_authorized_networks = concat([
     {
       cidr_block   = try(module.vpc[0].subnets_ips[0], var.subnet_ip)
