@@ -20,17 +20,22 @@ locals {
   node_pools   = concat(var.node_pools, local.platform_nodes)
 }
 
+
+data "google_compute_zones" "available" {}
 data "google_client_config" "default" {}
 
 module "gke" {
   source  = "terraform-google-modules/kubernetes-engine/google//modules/beta-private-cluster"
-  version = "22.1.0"
+  version = "25.0.0"
 
   project_id = var.project_id
   name       = local.cluster_name
 
   regional          = true
   region            = var.region
+  zones             = slice(data.google_compute_zones.available.names, 0, (
+    length(data.google_compute_zones.available.names) >= 3 ? 3 : length(data.google_compute_zones.available.names)
+  ))
   network           = var.vpc_name == "" ? module.vpc[0].network_name : var.vpc_name
   subnetwork        = var.vpc_name == "" ? module.vpc[0].subnets_names[0] : var.subnetwork
   ip_range_pods     = "pods"
