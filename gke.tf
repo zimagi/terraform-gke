@@ -31,9 +31,9 @@ module "gke" {
   project_id = var.project_id
   name       = local.cluster_name
 
-  regional          = true
-  region            = var.region
-  zones             = slice(data.google_compute_zones.available.names, 0, (
+  regional = true
+  region   = var.region
+  zones = slice(data.google_compute_zones.available.names, 0, (
     length(data.google_compute_zones.available.names) >= 3 ? 3 : length(data.google_compute_zones.available.names)
   ))
   network           = var.vpc_name == "" ? module.vpc[0].network_name : var.vpc_name
